@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:12
-    restart: unless-stopped
+    #restart: unless-stopped
     container_name: postgresql
     environment:
       POSTGRES_USER: postgres
