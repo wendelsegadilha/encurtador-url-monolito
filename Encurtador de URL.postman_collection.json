@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "d6158dae-5c2a-4176-acad-a4b8466e3b17",
+		"name": "Encurtador de URL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18923630"
+	},
+	"item": [
+		{
+			"name": "encurtar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code >= 200 && pm.response.code <= 299) {\r",
+							"    try {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.environment.set('urlEncurtada', jsonData.urlEncurtada);\r",
+							"    } catch (error) {\r",
+							"        console.error('Error parsing the JSON response:', error);\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"urlOriginal\":\"https://www.msn.com/pt-br/entretenimento/noticias/os-melhores-filmes-rom%C3%A2nticos-de-todos-os-tempos/ss-AA1ok1aT?ocid=winp2fptaskbar&cvid=4634e5b72a464cc99f0a44c3791a12fd&ei=6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/encurtar-url",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"encurtar-url"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "redirecionar",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlEncurtada}}",
+					"host": [
+						"{{urlEncurtada}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
